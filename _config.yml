@@ -6,7 +6,7 @@ plugins:
 # Site settings
 # title: "App Explained Blog"
 description: > # this means to ignore newlines until "email:"
-  Kotlin and Android development explained.
+  Kotlin and Android development & testing explained.
 
 email: hello@appexplained.com
 
