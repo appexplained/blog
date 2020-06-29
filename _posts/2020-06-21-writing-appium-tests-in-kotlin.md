@@ -2,8 +2,9 @@
 layout: post
 title: "Writing Appium tests in Kotlin"
 date: 2020-06-21
-categories: update
-tags: update, announce
+categories: appium, testing
+author: nathan
+tags: appium, testing
 image: https://media-exp1.licdn.com/dms/image/C5612AQE4_jpP5OHJyw/article-cover_image-shrink_720_1280/0?e=1598486400&v=beta&t=PNDt6hFcu-vArgaU2AmWObXHdCvQzHfQt3afSSDVK-I
 ---
 
