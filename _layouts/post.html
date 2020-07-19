@@ -26,8 +26,8 @@
               <h4 class="author-name" itemprop="author" itemscope itemtype="http://schema.org/Person">{{ page.author }}</h4>
               {% else %}
               <div class="author-image" style="background-image: url({{ site.nathan_author_image | prepend: site.baseurl }})">Blog Logo</div>
-              <div class="author-image" style="background-image: url({{ site.kim_author_image | prepend: site.baseurl }})">Blog Logo</div>
-              <h4 class="author-name" itemprop="author" itemscope itemtype="http://schema.org/Person">Nathan and Kim</h4>
+              <!-- <div class="author-image" style="background-image: url({{ site.kim_author_image | prepend: site.baseurl }})">Blog Logo</div> -->
+              <h4 class="author-name" itemprop="author" itemscope itemtype="http://schema.org/Person">Nathan</h4>
               {% endif %}
               on
               <time datetime="{{ page.date | date: "%F %R" }}">{{ page.date | date_to_string }}</time>
@@ -51,8 +51,8 @@
               <h4 class="author-name" itemprop="author" itemscope itemtype="http://schema.org/Person">{{ page.author }}</h4>
               {% else %}
               <div class="author-image" style="background-image: url({{ site.nathan_author_image | prepend: site.baseurl }})">Blog Logo</div>
-              <div class="author-image" style="background-image: url({{ site.kim_author_image | prepend: site.baseurl }})">Blog Logo</div>
-              <h4 class="author-name" itemprop="author" itemscope itemtype="http://schema.org/Person">Nathan and Kim</h4>
+              <!-- <div class="author-image" style="background-image: url({{ site.kim_author_image | prepend: site.baseurl }})">Blog Logo</div> -->
+              <h4 class="author-name" itemprop="author" itemscope itemtype="http://schema.org/Person">Nathan</h4>
               {% endif %} 
               on
               <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date_to_string }}</time>

@@ -22,7 +22,8 @@ name: "App Explained"
 
 # Authors
 nathan_author_image: "https://avatars1.githubusercontent.com/u/3166572?s=460&u=d387e31cbdaab560321a67a4867528033bbccc3b&v=4"
-kim_author_image: "https://avatars3.githubusercontent.com/u/19276188?s=460&u=506c19cb0a66673c474aa72c7e138029df01643b&v=4"
+# Reserving for future collaboration
+# kim_author_image: "https://avatars3.githubusercontent.com/u/19276188?s=460&u=506c19cb0a66673c474aa72c7e138029df01643b&v=4"
 
 paginate: 5
 url: "https://blog.appexplained.com" # the base hostname & protocol for your site

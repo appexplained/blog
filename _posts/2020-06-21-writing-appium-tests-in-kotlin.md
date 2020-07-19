@@ -2,9 +2,9 @@
 layout: post
 title: "Writing Appium tests in Kotlin"
 date: 2020-06-21
-categories: appium, testing
+categories: appium, test
 author: nathan
-tags: appium, testing
+tags: appium
 image: https://media-exp1.licdn.com/dms/image/C5612AQE4_jpP5OHJyw/article-cover_image-shrink_720_1280/0?e=1598486400&v=beta&t=PNDt6hFcu-vArgaU2AmWObXHdCvQzHfQt3afSSDVK-I
 ---
 
@@ -37,7 +37,7 @@ Right click the _kotlin_ subdirectory and select _New > Kotlin File/Class_. Crea
 - _TestBase_
 - _GoogleMapsAndroidTest_
 
-![](https://media-exp1.licdn.com/dms/image/C5612AQGyJQYOnYOzkg/article-inline_image-shrink_1000_1488/0?e=1598486400&v=beta&t=u6Kx6KGuz7DZrf7gNrTHH3uySjG0oeNKx5cl3qOnkSA)
+![](../assets/post-images/appium-kotlin/new-kotlin-file-appium-test.png)
 
 We will structure the project in these three classes to make the organization clear. The _ProjectCapabilities_ class will return the Desired Capabilities, _TestBase_ will be a base class for our test for scaffolding the test setup and teardown, and lastly the _GoogleMapsAndroidTest_ class will inherit from our _TestBase_, use the Desired Capabilities, and contain our test logic.
 
@@ -49,19 +49,19 @@ Let’s get started with the ProjectCapabilities class. This class will have a m
 import org.openqa.selenium.remote.DesiredCapabilities
 
 class ProjectCapabilities {
-    companion object {
-        fun AndroidBaseCapabilities(): DesiredCapabilities {
-            val caps = DesiredCapabilities()
-            caps.setCapability("autoAcceptAlerts", true)
-            caps.setCapability("platformName", "Android")
-            caps.setCapability("automationName", "UiAutomator2")
-            caps.setCapability("deviceName", "Android Emulator")
-            caps.setCapability("platformVersion", "10")
-            caps.setCapability("appPackage", "com.google.android.apps.maps")
-            caps.setCapability("appActivity", "com.google.android.maps.MapsActivity")
-            return caps
-        }
-    }
+companion object {
+fun AndroidBaseCapabilities(): DesiredCapabilities {
+val caps = DesiredCapabilities()
+caps.setCapability("autoAcceptAlerts", true)
+caps.setCapability("platformName", "Android")
+caps.setCapability("automationName", "UiAutomator2")
+caps.setCapability("deviceName", "Android Emulator")
+caps.setCapability("platformVersion", "10")
+caps.setCapability("appPackage", "com.google.android.apps.maps")
+caps.setCapability("appActivity", "com.google.android.maps.MapsActivity")
+return caps
+}
+}
 }
 {% endhighlight %}
 
@@ -90,19 +90,19 @@ Do you see the resemblance now? Haha either way, the source code for the class c
 import org.openqa.selenium.remote.DesiredCapabilities
 
 class ProjectCapabilities {
-    companion object {
-        fun AndroidBaseCapabilities(): DesiredCapabilities {
-            val caps = DesiredCapabilities()
-            caps.setCapability("autoAcceptAlerts", true)
-            caps.setCapability("platformName", "Android")
-            caps.setCapability("automationName", "UiAutomator2")
-            caps.setCapability("deviceName", "Android Emulator")
-            caps.setCapability("platformVersion", "10")
-            caps.setCapability("appPackage", "com.google.android.apps.maps")
-            caps.setCapability("appActivity", "com.google.android.maps.MapsActivity")
-            return caps
-        }
-    }
+companion object {
+fun AndroidBaseCapabilities(): DesiredCapabilities {
+val caps = DesiredCapabilities()
+caps.setCapability("autoAcceptAlerts", true)
+caps.setCapability("platformName", "Android")
+caps.setCapability("automationName", "UiAutomator2")
+caps.setCapability("deviceName", "Android Emulator")
+caps.setCapability("platformVersion", "10")
+caps.setCapability("appPackage", "com.google.android.apps.maps")
+caps.setCapability("appActivity", "com.google.android.maps.MapsActivity")
+return caps
+}
+}
 }
 {% endhighlight %}
 
@@ -122,12 +122,12 @@ import org.openqa.selenium.support.ui.WebDriverWait
 import java.time.Duration
 
 class GoogleMapsAndroidTest: TestBase() {
-    override var caps: DesiredCapabilities? = ProjectCapabilities.AndroidBaseCapabilities()
+override var caps: DesiredCapabilities? = ProjectCapabilities.AndroidBaseCapabilities()
 
     // Point of Interest for Search
     private val pointOfInterest: String = "Lincoln Memorial Reflecting Pool"
     private val pointOfInterestTextAttribute: String = "Lincoln Memorial Circle Northwest, Washington, DC"
-
+    
     // Elements
     private val firstLaunchSkipButton: String = """//*[@class="android.widget.Button" and @text="SKIP"]"""
     private val searchBox: String = "com.google.android.apps.maps:id/search_omnibox_text_box"
@@ -140,47 +140,48 @@ class GoogleMapsAndroidTest: TestBase() {
 
     @Test
     fun googleMapsTest() {
-
+    
         // Set an explicit wait of 10 seconds
         val wait = WebDriverWait(driver?.let { it }, 10)
-
+    
         // On first launch, press the SKIP button
         wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(MobileBy.xpath(firstLaunchSkipButton)))[0].click()
-
+    
         // Click on the Search Box
         wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.id(searchBox))).click()
-
+    
         // Enter point of interest
         val searchBoxInput = wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.id(searchBoxInput)))
         searchBoxInput.sendKeys(pointOfInterest)
-
+    
         // Tap the option
         wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.xpath(searchOptionListElement))).click()
-
+    
         // Tap on the Card title
         wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.id(resultCardTitle))).click()
-
+    
         // Tap on the Photos section
         wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(photosSection)))
-
+    
         // Swipe Down
         val finger: PointerInput = PointerInput(PointerInput.Kind.TOUCH, "finger")
         val moveToStart: Interaction = finger.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), 533, 1449)
         val pressDown: Interaction = finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg())
         val moveToEnd: Interaction = finger.createPointerMove(Duration.ofMillis(100), PointerInput.Origin.viewport(), 553, 538)
         val pressUp: Interaction = finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg())
-
+    
         val swipe = Sequence(finger, 0)
         swipe.addAction(moveToStart)
         swipe.addAction(pressDown)
         swipe.addAction(moveToEnd)
         swipe.addAction(pressUp)
-
+    
         driver?.let { it.perform(arrayListOf(swipe)) }
-
+    
         // Tap on the About section
         driver?.let { it.findElementByAccessibilityId(aboutSection).click() }
     }
+
 }
 {% endhighlight %}
 
