@@ -37,7 +37,7 @@ Right click the _kotlin_ subdirectory and select _New > Kotlin File/Class_. Crea
 - _TestBase_
 - _GoogleMapsAndroidTest_
 
-![](../assets/post-images/appium-kotlin/new-kotlin-file-appium-test.png)
+![](https://raw.githubusercontent.com/appexplained/blog/gh-pages/assets/post-images/appium-kotlin/new-kotlin-file-appium-test.png)
 
 We will structure the project in these three classes to make the organization clear. The _ProjectCapabilities_ class will return the Desired Capabilities, _TestBase_ will be a base class for our test for scaffolding the test setup and teardown, and lastly the _GoogleMapsAndroidTest_ class will inherit from our _TestBase_, use the Desired Capabilities, and contain our test logic.
 
@@ -127,7 +127,7 @@ override var caps: DesiredCapabilities? = ProjectCapabilities.AndroidBaseCapabil
     // Point of Interest for Search
     private val pointOfInterest: String = "Lincoln Memorial Reflecting Pool"
     private val pointOfInterestTextAttribute: String = "Lincoln Memorial Circle Northwest, Washington, DC"
-    
+
     // Elements
     private val firstLaunchSkipButton: String = """//*[@class="android.widget.Button" and @text="SKIP"]"""
     private val searchBox: String = "com.google.android.apps.maps:id/search_omnibox_text_box"
@@ -140,44 +140,44 @@ override var caps: DesiredCapabilities? = ProjectCapabilities.AndroidBaseCapabil
 
     @Test
     fun googleMapsTest() {
-    
+
         // Set an explicit wait of 10 seconds
         val wait = WebDriverWait(driver?.let { it }, 10)
-    
+
         // On first launch, press the SKIP button
         wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(MobileBy.xpath(firstLaunchSkipButton)))[0].click()
-    
+
         // Click on the Search Box
         wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.id(searchBox))).click()
-    
+
         // Enter point of interest
         val searchBoxInput = wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.id(searchBoxInput)))
         searchBoxInput.sendKeys(pointOfInterest)
-    
+
         // Tap the option
         wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.xpath(searchOptionListElement))).click()
-    
+
         // Tap on the Card title
         wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.id(resultCardTitle))).click()
-    
+
         // Tap on the Photos section
         wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(photosSection)))
-    
+
         // Swipe Down
         val finger: PointerInput = PointerInput(PointerInput.Kind.TOUCH, "finger")
         val moveToStart: Interaction = finger.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), 533, 1449)
         val pressDown: Interaction = finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg())
         val moveToEnd: Interaction = finger.createPointerMove(Duration.ofMillis(100), PointerInput.Origin.viewport(), 553, 538)
         val pressUp: Interaction = finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg())
-    
+
         val swipe = Sequence(finger, 0)
         swipe.addAction(moveToStart)
         swipe.addAction(pressDown)
         swipe.addAction(moveToEnd)
         swipe.addAction(pressUp)
-    
+
         driver?.let { it.perform(arrayListOf(swipe)) }
-    
+
         // Tap on the About section
         driver?.let { it.findElementByAccessibilityId(aboutSection).click() }
     }
