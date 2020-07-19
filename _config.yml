@@ -6,7 +6,7 @@ plugins:
 # Site settings
 # title: "App Explained Blog"
 description: > # this means to ignore newlines until "email:"
-  Kotlin and Android development & testing explained.
+  App development & testing explained.
 
 email: hello@appexplained.com
 
@@ -26,7 +26,7 @@ nathan_author_image: "https://avatars1.githubusercontent.com/u/3166572?s=460&u=d
 # kim_author_image: "https://avatars3.githubusercontent.com/u/19276188?s=460&u=506c19cb0a66673c474aa72c7e138029df01643b&v=4"
 
 paginate: 5
-url: "https://blog.appexplained.com" # the base hostname & protocol for your site
+url: "https://blog.appexplained.com"
 baseurl: ""
 
 twitter_handle: "@appexplained"
